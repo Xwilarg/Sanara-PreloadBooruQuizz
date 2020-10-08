@@ -17,6 +17,7 @@ namespace Sanara_PreloadBooruQuizz
             var booru = new Sakugabooru(); // Booru used for the search
             var targetTag = TagType.Copyright; // What tag we try to find
             var stopAfterFirst = true; // Do we stop searching after finding the tag
+            var blacklist = new[] { "western", "web" };
 
             // ----------
 
@@ -37,12 +38,15 @@ namespace Sanara_PreloadBooruQuizz
                         continue;
                     alreadyTaken.Add(post.id);
 
+                    if (post.tags.Any(x => blacklist.Contains(x)))
+                        continue;
+
                     foreach (var tag in post.tags)
                     {
                         TagType type;
                         if (!tagsCache.ContainsKey(tag))
                         {
-                            BooruSharp.Search.Tag.SearchResult tagInfo;
+                            SearchResult tagInfo;
                             try
                             {
                                 tagInfo = await booru.GetTagAsync(tag);
@@ -65,7 +69,7 @@ namespace Sanara_PreloadBooruQuizz
                                 break;
                         }
 
-                        File.WriteAllLines("TagsResult.txt", tagsCache.Select(x => x.Key + " " + x.Value));
+                        File.WriteAllLines("TagsResult.txt", allData.Select(x => x.Key + " " + x.Value));
                     }
                 }
             }
