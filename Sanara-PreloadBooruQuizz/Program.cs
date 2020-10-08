@@ -42,7 +42,12 @@ namespace Sanara_PreloadBooruQuizz
                         TagType type;
                         if (!tagsCache.ContainsKey(tag))
                         {
-                            var tagInfo = await booru.GetTagAsync(tag);
+                            BooruSharp.Search.Tag.SearchResult tagInfo;
+                            try
+                            {
+                                tagInfo = await booru.GetTagAsync(tag);
+                            } catch (Exception)
+                            { continue; }
                             tagsCache.Add(tag, tagInfo.type);
                             type = tagInfo.type;
                         }
