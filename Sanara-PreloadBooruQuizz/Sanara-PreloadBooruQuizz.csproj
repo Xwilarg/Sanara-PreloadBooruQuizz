@@ -6,4 +6,8 @@
     <RootNamespace>Sanara_PreloadBooruQuizz</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BooruSharp" Version="2.11.0" />
+  </ItemGroup>
+
 </Project>
