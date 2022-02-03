@@ -1,10 +1,5 @@
 ﻿using BooruSharp.Booru;
 using BooruSharp.Search.Tag;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sanara_PreloadBooruQuizz
 {
@@ -34,14 +29,14 @@ namespace Sanara_PreloadBooruQuizz
                     Console.Clear();
                     Console.WriteLine($"Data loaded: {alreadyTaken.Count}\nAnime loaded: {allData.Keys.Count}\nPlease wait...");
 
-                    if (alreadyTaken.Contains(post.id))
+                    if (alreadyTaken.Contains(post.ID))
                         continue;
-                    alreadyTaken.Add(post.id);
+                    alreadyTaken.Add(post.ID);
 
-                    if (post.tags.Any(x => blacklist.Contains(x)))
+                    if (post.Tags.Any(x => blacklist.Contains(x)))
                         continue;
 
-                    foreach (var tag in post.tags)
+                    foreach (var tag in post.Tags)
                     {
                         TagType type;
                         if (!tagsCache.ContainsKey(tag))
@@ -52,8 +47,8 @@ namespace Sanara_PreloadBooruQuizz
                                 tagInfo = await booru.GetTagAsync(tag);
                             } catch (Exception)
                             { continue; }
-                            tagsCache.Add(tag, tagInfo.type);
-                            type = tagInfo.type;
+                            tagsCache.Add(tag, tagInfo.Type);
+                            type = tagInfo.Type;
                         }
                         else
                             type = tagsCache[tag];

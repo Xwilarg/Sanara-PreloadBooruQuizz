@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Sanara_PreloadBooruQuizz</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BooruSharp" Version="2.11.0" />
+    <PackageReference Include="BooruSharp" Version="3.0.4" />
   </ItemGroup>
 
 </Project>
